@@ -1,1 +1,2 @@
-Static prototype: index.html access page, room.html private manor foyer.
+# AFC Manor v2
+Upload all files to GitHub root.
