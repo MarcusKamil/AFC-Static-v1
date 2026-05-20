@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>AFC Private Room</title><style>
+
+:root{--bg:#070706;--gold:#c9ad6a;--gold-soft:#9f854a;--text:#efe8dc;--muted:#9c9587;--dim:#665f52;--line:rgba(201,173,106,.22);--line-soft:rgba(255,255,255,.10)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+body{min-height:100vh;overflow-x:hidden;background:radial-gradient(circle at 50% 8%,rgba(201,173,106,.12),transparent 30%),radial-gradient(circle at 22% 55%,rgba(201,173,106,.055),transparent 26%),radial-gradient(circle at 78% 55%,rgba(201,173,106,.055),transparent 26%),#070706}
+
+.page{min-height:100vh;padding:38px clamp(22px,5vw,78px);position:relative}
+.page:before,.page:after{content:"";position:fixed;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,rgba(201,173,106,.55),transparent);opacity:.34;pointer-events:none}.page:before{left:9vw}.page:after{right:9vw}
+header{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:82px}.brand{color:var(--gold);font-family:Georgia,"Times New Roman",serif;font-size:clamp(15px,1.6vw,24px);letter-spacing:.55em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+nav{display:flex;gap:34px;color:var(--dim);font-size:10px;letter-spacing:.34em;text-transform:uppercase}nav a{color:inherit;text-decoration:none}nav a:hover{color:var(--gold)}
+.intro{text-align:center;margin:0 auto 74px;max-width:880px}.eyebrow{margin-bottom:24px;color:var(--gold-soft);font-size:10px;letter-spacing:.52em;text-transform:uppercase}
+h1{margin:0 0 26px;color:var(--text);font-family:Georgia,"Times New Roman",serif;font-size:clamp(42px,6vw,86px);font-weight:400;line-height:1.05}
+.intro p{margin:0 auto;max-width:580px;color:var(--muted);font-size:13px;letter-spacing:.18em;line-height:2.2;text-transform:uppercase}
+.manor{width:min(1160px,100%);margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.door{position:relative;min-height:390px;padding:34px 30px;border:1px solid var(--line-soft);border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.052),rgba(255,255,255,.014)),rgba(0,0,0,.22);box-shadow:0 30px 90px rgba(0,0,0,.30),inset 0 0 54px rgba(255,255,255,.018);overflow:hidden;text-decoration:none;color:var(--text);transition:.28s}
+.door:before{content:"";position:absolute;inset:18px;border:1px solid rgba(201,173,106,.10);border-radius:12px;pointer-events:none}
+.door:after{content:"";position:absolute;left:50%;bottom:-46px;width:180px;height:180px;border:1px solid rgba(201,173,106,.14);border-radius:999px;transform:translateX(-50%);opacity:.9}
+.door:hover{transform:translateY(-6px);border-color:rgba(201,173,106,.34);background:linear-gradient(180deg,rgba(201,173,106,.055),rgba(255,255,255,.014)),rgba(0,0,0,.28)}
+.door-number{color:var(--gold-soft);font-family:Georgia,"Times New Roman",serif;font-size:13px;letter-spacing:.32em;margin-bottom:64px}
+.door h2{margin:0 0 28px;color:var(--gold);font-family:Georgia,"Times New Roman",serif;font-size:clamp(24px,2.6vw,38px);font-weight:400;letter-spacing:.12em;line-height:1.18}
+.door p{margin:0;color:var(--muted);font-size:12px;letter-spacing:.13em;line-height:2}.enter{position:absolute;left:30px;bottom:32px;color:var(--dim);font-size:10px;letter-spacing:.34em;text-transform:uppercase}.door:hover .enter{color:var(--gold)}
+.privacy{margin:58px auto 0;text-align:center;color:#756d60;font-size:10px;letter-spacing:.42em;line-height:2;text-transform:uppercase}
+@media(max-width:900px){header{align-items:flex-start;flex-direction:column;margin-bottom:52px}nav{gap:18px;flex-wrap:wrap}.manor{grid-template-columns:1fr}.door{min-height:300px}.door-number{margin-bottom:38px}}
+</style></head><body><main class="page">
+<header><a class="brand" href="index.html">Art For Centuries</a><nav><a href="room.html">Private Room</a><a href="#">Account</a><a href="index.html">Exit</a></nav></header>
+<section class="intro"><div class="eyebrow">AFC Private Room</div><h1>Welcome, Marcus.</h1><p>Your private collection environment. A quiet architecture for works, intelligence and access.</p></section>
+<section class="manor">
+<a class="door" href="#"><div class="door-number">Room I</div><h2>Collection<br/>Room</h2><p>Your private archive of works, documents, provenance, notes and long-term collection structure.</p><div class="enter">Enter room →</div></a>
+<a class="door" href="#"><div class="door-number">Room II</div><h2>Intelligence<br/>Library</h2><p>Curated institutional movements, museum signals, market observations and relevant private context.</p><div class="enter">Enter room →</div></a>
+<a class="door" href="#"><div class="door-number">Room III</div><h2>Private<br/>Access</h2><p>Selected opportunities, discreet placements and works under consideration when relevance is aligned.</p><div class="enter">Enter room →</div></a>
+</section><p class="privacy">Everything inside this room is private by default.</p></main></body></html>
