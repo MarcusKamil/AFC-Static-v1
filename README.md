@@ -1,0 +1,1 @@
+Art For Centuries static v1. Upload index.html and README.md to the root of a GitHub repository. No build settings needed.

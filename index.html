@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Art For Centuries</title>
+  <meta name="description" content="Private art advisory, collection strategy and discreet access." />
+  <style>
+    :root { --bg:#090907; --gold:#c9ad6a; --gold-soft:#b89655; --text:#f5efe3; --muted:#d8cfbd; --line:rgba(255,255,255,.10); }
+    * { box-sizing: border-box; }
+    body {
+      margin:0; min-height:100vh;
+      background: radial-gradient(circle at 50% 0%, rgba(201,173,106,.20), transparent 36%),
+                  radial-gradient(circle at 80% 20%, rgba(255,255,255,.06), transparent 24%),
+                  var(--bg);
+      color:var(--text); font-family: Georgia, "Times New Roman", serif; overflow-x:hidden;
+    }
+    .wrap { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:48px 24px; text-align:center; }
+    .brand { color:var(--gold); text-transform:uppercase; letter-spacing:.35em; font-weight:500; font-size:clamp(30px,5vw,70px); text-shadow:0 0 28px rgba(201,173,106,.24); margin-bottom:20px; }
+    .quote { color:var(--gold-soft); letter-spacing:.16em; font-size:13px; font-style:italic; margin-bottom:70px; }
+    .headline { max-width:900px; font-size:clamp(38px,6vw,82px); line-height:1.05; margin:0 auto 34px; color:var(--text); font-weight:600; }
+    .subline { max-width:660px; margin:0 auto 54px; color:var(--muted); font-family:Arial, Helvetica, sans-serif; font-size:clamp(16px,2vw,20px); line-height:1.8; }
+    .request { width:min(680px,100%); border:1px solid var(--line); background:rgba(255,255,255,.035); border-radius:32px; padding:22px; display:grid; grid-template-columns:1fr auto; gap:14px; backdrop-filter:blur(10px); }
+    input { width:100%; border:1px solid var(--line); background:rgba(0,0,0,.30); color:var(--text); outline:none; border-radius:22px; padding:17px 20px; font-size:14px; font-family:Arial, Helvetica, sans-serif; }
+    input::placeholder { color:#817661; }
+    button { border:0; cursor:pointer; background:var(--gold); color:#090907; border-radius:999px; padding:17px 26px; font-size:14px; font-weight:600; white-space:nowrap; transition:.2s ease; font-family:Arial, Helvetica, sans-serif; }
+    button:hover { background:#dfc37d; transform:translateY(-1px); }
+    footer { position:fixed; left:0; right:0; bottom:24px; text-align:center; color:#817661; font-family:Arial, Helvetica, sans-serif; font-size:11px; letter-spacing:.25em; text-transform:uppercase; }
+    .note { margin-top:14px; color:var(--gold-soft); font-family:Arial, Helvetica, sans-serif; font-size:13px; opacity:0; transition:.25s ease; }
+    .note.show { opacity:1; }
+    @media (max-width:720px) { .quote{margin-bottom:48px;} .request{grid-template-columns:1fr;} footer{position:static; padding:32px 24px 24px;} }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="brand">Art For Centuries</div>
+    <div class="quote">To administrate art, is a form of art itself.</div>
+    <h1 class="headline">Private art advisory, collection strategy and discreet access.</h1>
+    <p class="subline">For collectors, families and institutions where discretion is not a preference, but a requirement.</p>
+    <form class="request" onsubmit="event.preventDefault(); document.querySelector('.note').classList.add('show');">
+      <input type="email" placeholder="Email" aria-label="Email" required />
+      <button type="submit">Request consideration →</button>
+    </form>
+    <div class="note">Request noted.</div>
+  </main>
+  <footer>Art For Centuries — By invitation only</footer>
+</body>
+</html>
