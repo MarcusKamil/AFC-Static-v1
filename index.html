@@ -4,45 +4,315 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Art For Centuries</title>
-  <meta name="description" content="Private art advisory, collection strategy and discreet access." />
+  <meta name="description" content="Private art advisory and collection strategy. Access by invitation only." />
   <style>
-    :root { --bg:#090907; --gold:#c9ad6a; --gold-soft:#b89655; --text:#f5efe3; --muted:#d8cfbd; --line:rgba(255,255,255,.10); }
-    * { box-sizing: border-box; }
-    body {
-      margin:0; min-height:100vh;
-      background: radial-gradient(circle at 50% 0%, rgba(201,173,106,.20), transparent 36%),
-                  radial-gradient(circle at 80% 20%, rgba(255,255,255,.06), transparent 24%),
-                  var(--bg);
-      color:var(--text); font-family: Georgia, "Times New Roman", serif; overflow-x:hidden;
+    :root {
+      --bg: #070706;
+      --panel: rgba(255,255,255,0.035);
+      --line: rgba(201,173,106,0.22);
+      --line-soft: rgba(255,255,255,0.10);
+      --gold: #c9ad6a;
+      --gold-soft: #9f854a;
+      --text: #efe8dc;
+      --muted: #9c9587;
+      --dim: #625b4f;
     }
-    .wrap { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:48px 24px; text-align:center; }
-    .brand { color:var(--gold); text-transform:uppercase; letter-spacing:.35em; font-weight:500; font-size:clamp(30px,5vw,70px); text-shadow:0 0 28px rgba(201,173,106,.24); margin-bottom:20px; }
-    .quote { color:var(--gold-soft); letter-spacing:.16em; font-size:13px; font-style:italic; margin-bottom:70px; }
-    .headline { max-width:900px; font-size:clamp(38px,6vw,82px); line-height:1.05; margin:0 auto 34px; color:var(--text); font-weight:600; }
-    .subline { max-width:660px; margin:0 auto 54px; color:var(--muted); font-family:Arial, Helvetica, sans-serif; font-size:clamp(16px,2vw,20px); line-height:1.8; }
-    .request { width:min(680px,100%); border:1px solid var(--line); background:rgba(255,255,255,.035); border-radius:32px; padding:22px; display:grid; grid-template-columns:1fr auto; gap:14px; backdrop-filter:blur(10px); }
-    input { width:100%; border:1px solid var(--line); background:rgba(0,0,0,.30); color:var(--text); outline:none; border-radius:22px; padding:17px 20px; font-size:14px; font-family:Arial, Helvetica, sans-serif; }
-    input::placeholder { color:#817661; }
-    button { border:0; cursor:pointer; background:var(--gold); color:#090907; border-radius:999px; padding:17px 26px; font-size:14px; font-weight:600; white-space:nowrap; transition:.2s ease; font-family:Arial, Helvetica, sans-serif; }
-    button:hover { background:#dfc37d; transform:translateY(-1px); }
-    footer { position:fixed; left:0; right:0; bottom:24px; text-align:center; color:#817661; font-family:Arial, Helvetica, sans-serif; font-size:11px; letter-spacing:.25em; text-transform:uppercase; }
-    .note { margin-top:14px; color:var(--gold-soft); font-family:Arial, Helvetica, sans-serif; font-size:13px; opacity:0; transition:.25s ease; }
-    .note.show { opacity:1; }
-    @media (max-width:720px) { .quote{margin-bottom:48px;} .request{grid-template-columns:1fr;} footer{position:static; padding:32px 24px 24px;} }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(201,173,106,0.13), transparent 28%),
+        radial-gradient(circle at 50% 82%, rgba(201,173,106,0.08), transparent 34%),
+        linear-gradient(90deg, rgba(201,173,106,0.08), transparent 15%, transparent 85%, rgba(201,173,106,0.08)),
+        #070706;
+    }
+
+    .stage {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 56px 24px 42px;
+      isolation: isolate;
+    }
+
+    .stage::before,
+    .stage::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(201,173,106,0.72), transparent);
+      opacity: 0.45;
+      z-index: -1;
+    }
+
+    .stage::before { left: 16%; }
+    .stage::after { right: 16%; }
+
+    .arc {
+      position: absolute;
+      width: min(900px, 86vw);
+      height: min(900px, 86vw);
+      border: 1px solid rgba(201,173,106,0.14);
+      border-radius: 999px;
+      top: 26%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: -1;
+      opacity: 0.65;
+    }
+
+    .shell {
+      width: min(920px, 100%);
+      text-align: center;
+    }
+
+    .brand {
+      margin: 0 0 30px;
+      color: var(--gold);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(22px, 3vw, 44px);
+      font-weight: 400;
+      letter-spacing: clamp(0.38em, 1.1vw, 0.74em);
+      line-height: 1.25;
+      text-transform: uppercase;
+      text-shadow: 0 0 26px rgba(201,173,106,0.20);
+    }
+
+    .divider {
+      width: 46px;
+      height: 1px;
+      background: var(--gold-soft);
+      margin: 0 auto 34px;
+      opacity: 0.8;
+    }
+
+    .kicker {
+      margin: 0 0 86px;
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.58em;
+      line-height: 2;
+      text-transform: uppercase;
+    }
+
+    .access-card {
+      width: min(560px, 100%);
+      margin: 0 auto 44px;
+      padding: clamp(34px, 5vw, 62px);
+      border: 1px solid var(--line-soft);
+      border-radius: 18px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.055), rgba(255,255,255,0.018)),
+        rgba(0,0,0,0.24);
+      box-shadow:
+        0 30px 90px rgba(0,0,0,0.40),
+        inset 0 0 60px rgba(255,255,255,0.025);
+      backdrop-filter: blur(14px);
+    }
+
+    .monogram {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 48px;
+      color: var(--gold);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 15px;
+      letter-spacing: 0.30em;
+    }
+
+    .monogram span {
+      display: block;
+      width: 1px;
+      height: 44px;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+      opacity: 0.9;
+    }
+
+    .access-title {
+      margin: 0 0 34px;
+      color: #aaa397;
+      font-size: 11px;
+      letter-spacing: 0.52em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .small-line {
+      width: 46px;
+      height: 1px;
+      background: rgba(201,173,106,0.45);
+      margin: 0 auto 42px;
+    }
+
+    .field {
+      position: relative;
+      margin-bottom: 28px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 14px;
+      text-align: left;
+      color: #8f887d;
+      font-size: 10px;
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+    }
+
+    input {
+      width: 100%;
+      border: 0;
+      border-bottom: 1px solid rgba(201,173,106,0.46);
+      background: transparent;
+      color: var(--text);
+      outline: none;
+      padding: 7px 0 15px;
+      font-size: 15px;
+      letter-spacing: 0.08em;
+    }
+
+    input::placeholder { color: rgba(156,149,135,0.42); }
+
+    .request {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 0;
+      border-bottom: 1px solid rgba(201,173,106,0.46);
+      background: transparent;
+      color: #a7a093;
+      cursor: pointer;
+      padding: 16px 0 18px;
+      text-align: left;
+      font-size: 11px;
+      letter-spacing: 0.52em;
+      text-transform: uppercase;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .request:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .arrow {
+      letter-spacing: 0;
+      font-size: 18px;
+      color: var(--gold);
+      transition: transform 0.2s ease;
+    }
+
+    .request:hover .arrow { transform: translateX(4px); }
+
+    .note {
+      height: 18px;
+      margin-top: 22px;
+      color: var(--gold-soft);
+      font-size: 10px;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .note.show { opacity: 1; }
+
+    .sentence {
+      margin: 0 0 82px;
+      color: #8f887d;
+      font-size: 10px;
+      letter-spacing: 0.46em;
+      line-height: 2.2;
+      text-transform: uppercase;
+    }
+
+    footer {
+      display: flex;
+      justify-content: center;
+      gap: clamp(38px, 7vw, 86px);
+      color: #6f675a;
+      font-size: 10px;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+    }
+
+    footer a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    footer a:hover { color: var(--gold); }
+
+    @media (max-width: 760px) {
+      .stage { padding: 44px 18px 30px; }
+      .stage::before { left: 8%; }
+      .stage::after { right: 8%; }
+      .brand { letter-spacing: 0.28em; font-size: 24px; }
+      .kicker { margin-bottom: 54px; letter-spacing: 0.34em; }
+      .access-card { padding: 34px 24px; border-radius: 16px; }
+      .access-title, .request { letter-spacing: 0.32em; }
+      .sentence { letter-spacing: 0.28em; margin-bottom: 46px; }
+      footer { gap: 24px; letter-spacing: 0.20em; }
+    }
   </style>
 </head>
+
 <body>
-  <main class="wrap">
-    <div class="brand">Art For Centuries</div>
-    <div class="quote">To administrate art, is a form of art itself.</div>
-    <h1 class="headline">Private art advisory, collection strategy and discreet access.</h1>
-    <p class="subline">For collectors, families and institutions where discretion is not a preference, but a requirement.</p>
-    <form class="request" onsubmit="event.preventDefault(); document.querySelector('.note').classList.add('show');">
-      <input type="email" placeholder="Email" aria-label="Email" required />
-      <button type="submit">Request consideration →</button>
-    </form>
-    <div class="note">Request noted.</div>
+  <main class="stage">
+    <div class="arc" aria-hidden="true"></div>
+
+    <section class="shell">
+      <h1 class="brand">Art For Centuries</h1>
+      <div class="divider" aria-hidden="true"></div>
+
+      <p class="kicker">Private art advisory & collection strategy</p>
+
+      <form class="access-card" onsubmit="event.preventDefault(); document.querySelector('.note').classList.add('show');">
+        <div class="monogram">A <span></span> C</div>
+
+        <h2 class="access-title">Access by invitation only</h2>
+        <div class="small-line" aria-hidden="true"></div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required />
+        </div>
+
+        <button class="request" type="submit">
+          Request access
+          <span class="arrow">→</span>
+        </button>
+
+        <div class="note">Request noted</div>
+      </form>
+
+      <p class="sentence">Discretion is not a preference, it is a standard.</p>
+
+      <footer>
+        <a href="mailto:contact@artforcenturies.com">Contact</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </footer>
+    </section>
   </main>
-  <footer>Art For Centuries — By invitation only</footer>
 </body>
 </html>
